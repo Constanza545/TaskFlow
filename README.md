@@ -29,6 +29,21 @@ TaskFlow es una app de equipo organizada en **secciones**, cada una demostrando 
 
 Las secciones de Mercado y Clima existen como prueba de consumo de servicios de terceros: cada una integra una API pública distinta, siempre proxied y cacheada por el backend (el navegador nunca llama a la API externa directamente).
 
+## Capturas
+
+Una vista rápida del proyecto para mostrar en portafolio. Reemplaza estas imágenes en `docs/screenshots/` con capturas reales si lo deseas.
+
+- **Tablero (Dashboard)**
+
+    ![Dashboard](docs/screenshots/dashboard.svg)
+
+- **Widget de Mercado**
+
+    ![Market](docs/screenshots/market.svg)
+
+- **Clima**
+
+    ![Weather](docs/screenshots/weather.svg)
 ## Por qué estas decisiones técnicas
 
 - **JWT con rol embebido** en vez de sesiones en servidor: sin estado, fácil de escalar horizontalmente, y el mismo token autentica tanto la API REST como la conexión de Socket.io.
