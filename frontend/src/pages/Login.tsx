@@ -4,12 +4,15 @@ import { useAuth } from '../hooks/useAuth';
 import { getApiErrorMessage } from '../services/api';
 import { Button, FormField } from '../components/ui';
 
+// Credencial de la instancia demo pública; solo se muestra si está configurada.
+const DEMO_EMAIL = import.meta.env.VITE_DEMO_EMAIL as string | undefined;
+const DEMO_PASSWORD = import.meta.env.VITE_DEMO_PASSWORD as string | undefined;
+
 export function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  // TEMPORAL: credencial demo prellenada para desarrollo (la siembra el backend).
-  const [email, setEmail] = useState('admin@demo.com');
-  const [password, setPassword] = useState('321');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -78,10 +81,11 @@ export function Login() {
           </p>
         </form>
 
-        <p className="text-xs text-white/90 bg-white/15 border border-white/25 rounded-full px-4 py-2 mt-4 text-center backdrop-blur-sm">
-          Acceso demo temporal: <strong>admin@demo.com</strong> / <strong>321</strong> (solo
-          desarrollo)
-        </p>
+        {DEMO_EMAIL && DEMO_PASSWORD && (
+          <p className="text-xs text-white/90 bg-white/15 border border-white/25 rounded-full px-4 py-2 mt-4 text-center backdrop-blur-sm">
+            Acceso demo: <strong>{DEMO_EMAIL}</strong> / <strong>{DEMO_PASSWORD}</strong>
+          </p>
+        )}
       </div>
     </div>
   );
