@@ -1,5 +1,8 @@
 # TaskFlow
 
+[![CI](https://github.com/Constanza545/TaskFlow/actions/workflows/ci.yml/badge.svg)](https://github.com/Constanza545/TaskFlow/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 Gestor de tareas de equipo con autenticación por roles y un dashboard en tiempo real. Proyecto personal construido para practicar y demostrar un flujo full-stack completo: API REST, WebSockets, autorización basada en roles y consumo de una API pública externa.
 
 > Proyecto de portfolio — código abierto bajo licencia MIT.
@@ -31,19 +34,17 @@ Las secciones de Mercado y Clima existen como prueba de consumo de servicios de 
 
 ## Capturas
 
-Una vista rápida del proyecto para mostrar en portafolio. Reemplaza estas imágenes en `docs/screenshots/` con capturas reales si lo deseas.
+- **Tablero (Dashboard)** — tareas por estado, sincronizadas en tiempo real vía WebSocket
 
-- **Tablero (Dashboard)**
+    ![Dashboard](docs/screenshots/dashboard.png)
 
-    ![Dashboard](docs/screenshots/dashboard.svg)
+- **Mercado** — precios en vivo de BTC/ETH/SOL e histórico de 30 días de Bitcoin (CoinGecko)
 
-- **Widget de Mercado**
+    ![Market](docs/screenshots/market.png)
 
-    ![Market](docs/screenshots/market.svg)
+- **Clima** — condiciones actuales y pronóstico a 7 días con buscador de ciudades (Open-Meteo)
 
-- **Clima**
-
-    ![Weather](docs/screenshots/weather.svg)
+    ![Weather](docs/screenshots/weather.png)
 ## Por qué estas decisiones técnicas
 
 - **JWT con rol embebido** en vez de sesiones en servidor: sin estado, fácil de escalar horizontalmente, y el mismo token autentica tanto la API REST como la conexión de Socket.io.

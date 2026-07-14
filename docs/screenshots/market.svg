@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
-  <rect width="100%" height="100%" fill="#001f3f"/>
-  <polyline points="40,360 120,280 200,300 280,240 360,260 440,200 520,220 600,180 680,160" fill="none" stroke="#34d399" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-  <text x="40" y="60" fill="#fff" font-family="Segoe UI, Roboto, Arial" font-size="22">Widget de Mercado</text>
-  <text x="40" y="100" fill="#cfeee8" font-family="Segoe UI, Roboto, Arial" font-size="14">Precios en vivo (CoinGecko) · Histórico 30 días</text>
-</svg>
