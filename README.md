@@ -26,7 +26,7 @@ Gestor de tareas de equipo con autenticación por roles y un dashboard en tiempo
 
 TaskFlow es una app de equipo organizada en **secciones**, cada una demostrando una capacidad distinta del stack:
 
-- **Tablero** — gestión de tareas con tres niveles de permiso (`admin`, `miembro`, `invitado`) que controlan quién puede crear, editar o eliminar. Registro/login con JWT; los cambios se sincronizan por WebSockets a todos los usuarios conectados.
+- **Tablero** — gestión de tareas con drag & drop entre columnas (con actualización optimista y reversión si la API falla) y tres niveles de permiso (`admin`, `miembro`, `invitado`) que controlan quién puede crear, editar o eliminar. Registro/login con JWT; los cambios se sincronizan por WebSockets a todos los usuarios conectados.
 - **Mercado** — precios de criptomonedas en vivo (retransmitidos por WebSocket) e histórico de 30 días de Bitcoin en un gráfico SVG propio. Fuente: [CoinGecko](https://www.coingecko.com/en/api/documentation) (gratuita, sin API key), con caché en el backend.
 - **Clima** — condiciones actuales y pronóstico a 7 días de cualquier ciudad, con buscador con geocodificación. Fuente: [Open-Meteo](https://open-meteo.com/) (gratuita, sin API key), con caché por ciudad.
 
@@ -34,7 +34,11 @@ Las secciones de Mercado y Clima existen como prueba de consumo de servicios de 
 
 ## Capturas
 
-- **Tablero (Dashboard)** — tareas por estado, sincronizadas en tiempo real vía WebSocket
+- **Login** — con acceso rápido a las cuentas demo de cada rol (si están configuradas por entorno)
+
+    ![Login](docs/screenshots/login.png)
+
+- **Tablero (Dashboard)** — tareas por estado con drag & drop, sincronizadas en tiempo real vía WebSocket
 
     ![Dashboard](docs/screenshots/dashboard.png)
 
@@ -57,7 +61,7 @@ Las secciones de Mercado y Clima existen como prueba de consumo de servicios de 
 | Capa | Tecnología |
 |---|---|
 | Backend | Node.js, Express, TypeScript, Socket.io, `node:sqlite`, JWT, bcrypt, Zod |
-| Frontend | React, Vite, TypeScript, React Router, Tailwind CSS, Axios, Socket.io-client |
+| Frontend | React, Vite, TypeScript, React Router, Tailwind CSS, Axios, Socket.io-client, dnd-kit |
 | Tests | Jest + Supertest (backend) |
 | CI | GitHub Actions (lint + typecheck + tests + build) |
 | API externa | CoinGecko (pública, sin API key) |
@@ -194,6 +198,10 @@ El cliente se conecta pasando el JWT en `socket.handshake.auth.token`.
 | Cambiar rol de otro usuario | ✅ | ❌ | ❌ |
 
 El primer usuario registrado en una instancia nueva recibe `admin` automáticamente; desde ahí puede promover o degradar a otros usuarios vía `PATCH /users/:id/role`.
+
+### Cuentas demo por rol (opcional)
+
+Si defines `DEMO_USER_EMAIL` y `DEMO_USER_PASSWORD` en el backend, al arrancar se crean tres cuentas — `admin`, `miembro` e `invitado` (los emails de las dos últimas se derivan del dominio del primero) — y, con `VITE_DEMO_EMAIL` / `VITE_DEMO_PASSWORD` en el frontend, la pantalla de login muestra botones de acceso rápido para probar cada rol y comparar sus permisos. Sin esas variables no se crea ninguna cuenta.
 
 ### Decisiones de seguridad
 

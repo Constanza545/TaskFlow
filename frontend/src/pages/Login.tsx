@@ -4,9 +4,27 @@ import { useAuth } from '../hooks/useAuth';
 import { getApiErrorMessage } from '../services/api';
 import { Button, FormField } from '../components/ui';
 
-// Credencial de la instancia demo pública; solo se muestra si está configurada.
+// Cuentas de la instancia demo pública; solo se muestran si están configuradas.
+// Los emails de miembro/invitado se derivan igual que en el seed del backend.
 const DEMO_EMAIL = import.meta.env.VITE_DEMO_EMAIL as string | undefined;
 const DEMO_PASSWORD = import.meta.env.VITE_DEMO_PASSWORD as string | undefined;
+
+const DEMO_ACCOUNTS =
+  DEMO_EMAIL && DEMO_PASSWORD
+    ? [
+        { label: 'Admin', email: DEMO_EMAIL, hint: 'Crea, edita y elimina tareas; gestiona roles' },
+        {
+          label: 'Miembro',
+          email: `miembro@${DEMO_EMAIL.split('@')[1]}`,
+          hint: 'Crea y edita tareas; no puede eliminar',
+        },
+        {
+          label: 'Invitado',
+          email: `invitado@${DEMO_EMAIL.split('@')[1]}`,
+          hint: 'Solo lectura: no puede editar las tarjetas',
+        },
+      ]
+    : null;
 
 export function Login() {
   const { login } = useAuth();
@@ -25,6 +43,19 @@ export function Login() {
       navigate('/');
     } catch (err) {
       setError(getApiErrorMessage(err) ?? 'No se pudo iniciar sesión');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleDemoLogin(demoEmail: string) {
+    setError(null);
+    setLoading(true);
+    try {
+      await login(demoEmail, DEMO_PASSWORD!);
+      navigate('/');
+    } catch (err) {
+      setError(getApiErrorMessage(err) ?? 'No se pudo iniciar sesión con la cuenta demo');
     } finally {
       setLoading(false);
     }
@@ -81,10 +112,26 @@ export function Login() {
           </p>
         </form>
 
-        {DEMO_EMAIL && DEMO_PASSWORD && (
-          <p className="text-xs text-white/90 bg-white/15 border border-white/25 rounded-full px-4 py-2 mt-4 text-center backdrop-blur-sm">
-            Acceso demo: <strong>{DEMO_EMAIL}</strong> / <strong>{DEMO_PASSWORD}</strong>
-          </p>
+        {DEMO_ACCOUNTS && (
+          <div className="bg-white/15 border border-white/25 rounded-2xl px-4 py-3 mt-4 text-center backdrop-blur-sm">
+            <p className="text-xs text-white/90 mb-2">
+              Prueba la demo con cada rol y compara sus permisos:
+            </p>
+            <div className="flex justify-center gap-2">
+              {DEMO_ACCOUNTS.map((account) => (
+                <button
+                  key={account.label}
+                  type="button"
+                  title={account.hint}
+                  disabled={loading}
+                  onClick={() => handleDemoLogin(account.email)}
+                  className="text-xs font-medium text-white bg-white/20 hover:bg-white/30 disabled:opacity-50 ring-1 ring-white/30 rounded-full px-4 py-1.5 transition-colors"
+                >
+                  {account.label}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </div>
