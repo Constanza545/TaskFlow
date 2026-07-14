@@ -71,9 +71,9 @@ export function Login() {
           </Button>
 
           <p className="text-xs text-gray-500 mt-5 text-center">
-            ¿No tenés cuenta?{' '}
+            ¿No tienes cuenta?{' '}
             <Link to="/register" className="text-brand-600 font-medium hover:underline">
-              Registrate
+              Regístrate
             </Link>
           </p>
         </form>

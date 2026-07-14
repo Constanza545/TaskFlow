@@ -21,7 +21,7 @@ export function requireRole(...allowedRoles: Role[]) {
       return;
     }
     if (!allowedRoles.includes(user.role)) {
-      res.status(403).json({ error: 'No tenés permisos para realizar esta acción' });
+      res.status(403).json({ error: 'No tienes permisos para realizar esta acción' });
       return;
     }
     req.user.role = user.role; // los handlers posteriores ven el rol vigente

@@ -74,9 +74,9 @@ export function Register() {
         </Button>
 
         <p className="text-xs text-gray-500 mt-4 text-center">
-          ¿Ya tenés cuenta?{' '}
+          ¿Ya tienes cuenta?{' '}
           <Link to="/login" className="text-brand-600 hover:underline">
-            Iniciá sesión
+            Inicia sesión
           </Link>
         </p>
       </form>

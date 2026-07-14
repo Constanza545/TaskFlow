@@ -116,7 +116,7 @@ cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 ```
 
-Los valores por defecto ya funcionan en local; ajustá `JWT_SECRET` si vas a desplegar el proyecto.
+Los valores por defecto ya funcionan en local; ajusta `JWT_SECRET` si vas a desplegar el proyecto.
 
 ### 3. Correr en desarrollo
 
@@ -130,7 +130,7 @@ cd backend && pnpm dev
 cd frontend && pnpm dev
 ```
 
-Abrí `http://localhost:5173`. El primer usuario que se registre queda como **admin** automáticamente.
+Abre `http://localhost:5173`. El primer usuario que se registre queda como **admin** automáticamente.
 
 ## Scripts disponibles
 
@@ -196,7 +196,7 @@ El primer usuario registrado en una instancia nueva recibe `admin` automáticame
 
 ### Decisiones de seguridad
 
-- **El rol vigente se lee de la base en cada acción privilegiada**, no del JWT: degradar a un admin surte efecto inmediato aunque su token siga sin expirar (limitación clásica de los JWT sin estado, resuelta acá con una lectura extra que en SQLite es gratis).
+- **El rol vigente se lee de la base en cada acción privilegiada**, no del JWT: degradar a un admin surte efecto inmediato aunque su token siga sin expirar (limitación clásica de los JWT sin estado, resuelta aquí con una lectura extra que en SQLite es gratis).
 - **No se puede degradar al único admin** de la instancia: la API responde `409` para evitar dejarla sin administración.
 - **Rate limiting en `/api/auth`** (20 intentos / 15 min por IP) contra fuerza bruta de credenciales, y cabeceras endurecidas con `helmet`.
 - Las contraseñas se guardan con hash bcrypt; los payloads se validan con Zod antes de tocar la base.

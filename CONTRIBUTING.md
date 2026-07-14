@@ -4,16 +4,16 @@ Este es un proyecto personal de portfolio, pero está armado siguiendo práctica
 
 ## Flujo de trabajo
 
-1. Forkeá el repositorio y creá una rama descriptiva: `feature/nombre-corto` o `fix/nombre-corto`.
-2. Instalá dependencias en `backend/` y `frontend/` (ver [README](./README.md#puesta-en-marcha)).
-3. Antes de abrir un PR, corré en ambos paquetes:
+1. Haz un fork del repositorio y crea una rama descriptiva: `feature/nombre-corto` o `fix/nombre-corto`.
+2. Instala las dependencias en `backend/` y `frontend/` (ver [README](./README.md#puesta-en-marcha)).
+3. Antes de abrir un PR, ejecuta en ambos paquetes:
    ```bash
    pnpm lint
    pnpm test       # solo backend
    pnpm build
    ```
-4. Escribí mensajes de commit en modo imperativo y en español o inglés de forma consistente (ej. `feat: agrega paginación al tablero`).
-5. Abrí el Pull Request describiendo qué cambia y por qué. Si tocás lógica de permisos o auth, agregá o actualizá tests en `backend/src/tests/`.
+4. Escribe mensajes de commit en modo imperativo y en español o inglés de forma consistente (ej. `feat: agrega paginación al tablero`).
+5. Abre el Pull Request describiendo qué cambia y por qué. Si tocas lógica de permisos o auth, agrega o actualiza tests en `backend/src/tests/`.
 
 ## Convenciones de código
 
@@ -24,4 +24,4 @@ Este es un proyecto personal de portfolio, pero está armado siguiendo práctica
 
 ## Reportar bugs
 
-Abrí un issue con: pasos para reproducir, comportamiento esperado vs. observado, y versión de Node usada.
+Abre un issue con: pasos para reproducir, comportamiento esperado vs. observado, y versión de Node usada.
